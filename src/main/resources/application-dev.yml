@@ -1,0 +1,8 @@
+server:
+  port: 8081
+
+person:
+  age: 26
+  gName: lisa
+#从配置文件中读取属性值
+#content: "age: ${age},aName: ${gName}"
