@@ -1,7 +1,11 @@
 package com.rongrong.springboot.demo.service;
 
+import com.rongrong.springboot.demo.domain.Result;
 import com.rongrong.springboot.demo.domain.Student;
+import com.rongrong.springboot.demo.exception.StudentException;
+import com.rongrong.springboot.demo.exceptionenum.ResultEnum;
 import com.rongrong.springboot.demo.responstory.StudentResponstory;
+import com.rongrong.springboot.demo.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +23,7 @@ public class StudentService {
     StudentResponstory studentResponstory;
 
     @Transactional
-    public void insertTwoStudent(){
+    public void insertTwoStudent() {
         Student student1 = new Student();
         student1.setName("Amily");
         student1.setAge(17);
@@ -34,4 +38,22 @@ public class StudentService {
         studentResponstory.save(student2);
     }
 
+    /**
+     * 查询学生年龄
+     *
+     * @param id
+     * @throws Exception
+     */
+    public void getStudnetAge(Integer id) throws Exception {
+        Student student = studentResponstory.findOne(id);
+        Integer age = student.getAge();
+        //小于10岁，返回“应该上小学”，大于10岁且小于16岁，返回“应该上初中了”,其他正常输出
+        if (age <= 10) {
+            throw new StudentException(ResultEnum.PRIMARY_SCHOOL);
+        } else if (age > 10 && age < 16) {
+            throw new StudentException(ResultEnum.HIGH_SCHOOL);
+        }else {
+            throw new StudentException(ResultEnum.SUCCESS);
+        }
+    }
 }

@@ -1,8 +1,12 @@
 package com.rongrong.springboot.demo.controller;
 
+import com.rongrong.springboot.demo.domain.Result;
 import com.rongrong.springboot.demo.domain.Student;
+import com.rongrong.springboot.demo.exception.StudentException;
+import com.rongrong.springboot.demo.exceptionenum.ResultEnum;
 import com.rongrong.springboot.demo.responstory.StudentResponstory;
 import com.rongrong.springboot.demo.service.StudentService;
+import com.rongrong.springboot.demo.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -38,18 +42,17 @@ public class StudentController {
      * @return
      */
     @PostMapping("/studentAdd")
-    public Student sudentAdd(@Valid Student student, BindingResult bindingResult) {
+    public Result<Student> sudentAdd(@Valid Student student, BindingResult bindingResult) {
         if(bindingResult.hasFieldErrors()){
-            //输出错误信息
-            System.out.println(bindingResult.getFieldError().getDefaultMessage());
-            return null;
+            throw new StudentException(ResultEnum.UNKNOW_ERROR);
         }
         student.setName(student.getName());
         student.setAge(student.getAge());
         student.setSex(student.getSex());
         student.setEmail(student.getEmail());
+        Result result = ResultUtils.success(studentResponstory.save(student));
         //保存和更新都用该方法
-        return studentResponstory.save(student);
+        return result;
     }
 
     /**
@@ -117,5 +120,15 @@ public class StudentController {
     @PostMapping("/student/insertTwo")
     public void insertTwo() {
         studentService.insertTwoStudent();
+    }
+
+    /**
+     * 获取学生年龄
+     * @param id
+     * @throws Exception
+     */
+    @GetMapping("/students/getAge/{id}")
+    public void getAge(@PathVariable("id") Integer id) throws Exception {
+        studentService.getStudnetAge(id);
     }
 }
