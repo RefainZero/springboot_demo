@@ -8,4 +8,5 @@
 - 最外层对象统一输出json
 - 使用@ControllerAdvice，配合@ExceptionHandle注解实现全局异常处理
 - 使用注解实现code和msg的映射
+- 添加单元测试
 
