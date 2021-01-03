@@ -24,7 +24,7 @@ public class StudentControllerTest {
 
     @Test
     public void sudentFindOne() {
-        Student student = studentResponstory.findOne(13);
-        Assert.assertEquals(new Integer(25), student.getAge());
+        Student student = studentResponstory.findOne(16);
+        Assert.assertEquals(new Integer(10), student.getAge());
     }
 }

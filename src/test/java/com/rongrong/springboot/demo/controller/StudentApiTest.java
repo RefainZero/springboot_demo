@@ -30,7 +30,7 @@ public class StudentApiTest {
     public void testStudentApiTest() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/students"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("student"));
+                .andExpect(MockMvcResultMatchers.content().string("[{\"id\":16,\"name\":\"alex\",\"age\":10,\"sex\":\"boy\",\"email\":\"alex@gmail.com\"},{\"id\":857,\"name\":\"tester\",\"age\":15,\"sex\":\"boy\",\"email\":\"tester@gamil.com\"}]"));
     }
 
 }
