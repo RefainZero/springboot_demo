@@ -1,6 +1,5 @@
 package com.rongrong.springboot.demo.controller;
 
-import com.rongrong.springboot.demo.responstory.StudentResponstory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ public class StudentApiTest {
     public void testStudentApiTest() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/students"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("[{\"id\":16,\"name\":\"alex\",\"age\":10,\"sex\":\"boy\",\"email\":\"alex@gmail.com\"},{\"id\":857,\"name\":\"tester\",\"age\":15,\"sex\":\"boy\",\"email\":\"tester@gamil.com\"}]"));
+                .andExpect(MockMvcResultMatchers.content().string("[{\"id\":25,\"name\":\"xiaoqiang\",\"age\":33,\"sex\":\"boy\",\"email\":\"xiaoqiang@gmail.com\"}]"));
     }
 
 }
